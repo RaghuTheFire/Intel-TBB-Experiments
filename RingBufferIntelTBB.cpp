@@ -6,7 +6,10 @@
 template < typename T >
   class RingBuffer 
   {
-    public: RingBuffer(size_t capacity): buffer(capacity) {}
+    public: RingBuffer(size_t capacity): buffer(capacity) 
+    {
+        
+    }
 
     void push(const T & item) 
     {
