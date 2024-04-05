@@ -1,1 +1,20 @@
-# IntelTBB-Programs
+# Utilities which uses the power of Intel Threaded Building Blocks
+# OpenCvRTSPIntelTBBDemo.cpp
+This C++ code demonstrates the use of the Intel Threading Building Blocks (TBB) library and the OpenCV library to read and process an RTSP (Real-Time Streaming Protocol) video stream in a parallel manner. 
+Here's a breakdown of the code: 
+1. The code includes the necessary header files: `<iostream>` for input/output operations, `<thread>` for working with threads, `<tbb/tbb.h>` for the TBB library, and `<opencv2/opencv.hpp>` for the OpenCV library.
+2. The `processFrame` function is defined, which takes a `const Mat&` (a reference to an OpenCV `Mat` object representing a frame) as input. This function is responsible for processing the frame, in this case, it simply displays the frame using `imshow` and `waitKey`.
+3. The `readRTSPStream` function is defined, which takes a `const string&` (a reference to a string) representing the RTSP stream URL as input. This function opens the RTSP stream using `VideoCapture`, and then continuously reads frames from the stream using `cap.read(frame)`. Each frame is then passed to the `processFrame` function for processing. 4. The `main` function is the entry point of the program. It first sets the RTSP stream URL to a placeholder value, which should be replaced with the actual RTSP stream URL.
+5. The code then initializes the TBB task scheduler using `tbb::task_scheduler_init init`.
+6. The core of the program is the `tbb::parallel_for` loop, which is used to read the RTSP stream in parallel using multiple threads. The loop iterates over the range of available threads (determined by the default number of threads in the TBB task scheduler) and calls the `readRTSPStream` function for each thread.
+
+In summary, this code sets up a parallel processing pipeline to read and process an RTSP video stream using the TBB library and the OpenCV library. The `tbb::parallel_for` loop allows the RTSP stream to be read and processed concurrently, potentially improving the overall performance of the application.
+
+# RingBufferIntelTBB.cpp
+This C++ code demonstrates the use of a concurrent ring buffer, which is a data structure that allows for the storage and retrieval of elements in a circular fashion. The code uses the Intel Threading Building Blocks (TBB) library to implement the concurrent operations. 
+Here's a breakdown of the code: 
+1. The `RingBuffer` class is defined, which has a `push` method to add elements to the buffer and a `pop` method to remove elements from the buffer. The buffer is implemented using the `tbb::concurrent_bounded_queue` class from the TBB library, which provides thread-safe concurrent access to the queue.
+2. In the `main` function, a `RingBuffer` of integers is created with a size of 10.
+3. The `tbb::parallel_for` function is used to create multiple threads (4 in this case) that push items into the ring buffer. Each thread pushes an item with a value equal to its thread index multiplied by 10 (e.g., thread 0 pushes 0, thread 1 pushes 10, etc.).
+4. Another `tbb::parallel_for` function is used to create multiple threads (again, 4 in this case) that pop items from the ring buffer. Each thread pops an item and prints it to the console.
+The purpose of this code is to demonstrate the use of a concurrent ring buffer, where multiple threads can safely push and pop items from the buffer without causing race conditions or other concurrency issues. The TBB library provides the necessary synchronization primitives to ensure the thread-safe operation of the buffer.
