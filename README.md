@@ -10,6 +10,17 @@ Here's a breakdown of the code:
 
 In summary, this code sets up a parallel processing pipeline to read and process an RTSP video stream using the TBB library and the OpenCV library. The `tbb::parallel_for` loop allows the RTSP stream to be read and processed concurrently, potentially improving the overall performance of the application.
 
+# OpenCvRTSPIntelTBBDemo2.cpp
+This C++ code is a multi-threaded application that retrieves video frames from multiple RTSP (Real-Time Streaming Protocol) streams and displays them in a window using the OpenCV library. 
+Here's a breakdown of the code: 
+1. The code includes the necessary header files for input/output, vectors, threads, mutexes, condition variables, queues, and the OpenCV library.
+2. It declares global variables: - `rtsp_urls`: a vector to store the RTSP stream URLs. - `frame_queue`: a concurrent queue to store the video frames. - `queue_mutex`: a mutex to protect the access to the frame queue. - `queue_cv`: a condition variable to signal when frames are available in the queue. - `stop_threads`: a flag to signal the threads to stop.
+3. The `grab_frame` function is responsible for retrieving frames from a single RTSP stream. It opens the video capture, reads frames, and pushes them into the `frame_queue`. This function runs in a loop until the `stop_threads` flag is set.
+4. The `display_frames` function is responsible for displaying the frames from the `frame_queue`. It waits for frames to be available in the queue, then retrieves and displays them using OpenCV's `imshow` and `waitKey` functions. This function also runs in a loop until the `stop_threads` flag is set.
+5. The `main` function: - Loads the RTSP stream URLs from configuration files (or a hardcoded list in this example). - Starts the frame grabbing threads, one for each RTSP stream. - Starts the frame display thread. - Waits for user input to stop the program. - Sets the `stop_threads` flag to signal the threads to stop. - Waits for all the threads to finish.
+6. The purpose of this code is to provide a multi-threaded solution for retrieving and displaying video frames from multiple RTSP streams simultaneously.
+7. The use of a concurrent queue and condition variables ensures that the frame grabbing and display processes are synchronized and efficient.
+
 # RingBufferIntelTBB.cpp
 This C++ code demonstrates the use of a concurrent ring buffer, which is a data structure that allows for the storage and retrieval of elements in a circular fashion. The code uses the Intel Threading Building Blocks (TBB) library to implement the concurrent operations. 
 Here's a breakdown of the code: 
