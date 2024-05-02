@@ -29,3 +29,26 @@ Here's a breakdown of the code:
 3. The `tbb::parallel_for` function is used to create multiple threads (4 in this case) that push items into the ring buffer. Each thread pushes an item with a value equal to its thread index multiplied by 10 (e.g., thread 0 pushes 0, thread 1 pushes 10, etc.).
 4. Another `tbb::parallel_for` function is used to create multiple threads (again, 4 in this case) that pop items from the ring buffer. Each thread pops an item and prints it to the console.
 The purpose of this code is to demonstrate the use of a concurrent ring buffer, where multiple threads can safely push and pop items from the buffer without causing race conditions or other concurrency issues. The TBB library provides the necessary synchronization primitives to ensure the thread-safe operation of the buffer.
+
+
+# 
+
+This C++ code demonstrates the usage of OpenCV's parallel processing capabilities using Intel's Threading Building Blocks (TBB) library. 
+Here's a breakdown of the code: 
+1. The code includes necessary headers for OpenCV, threading, and chrono (for timing).
+2. The `IMAGE_HEIGHT` constant is set to 20, which affects how many tasks OpenCV splits the processing into.
+3. The `reportThreads()` function sleeps for 100 milliseconds to ensure the process reported thread count is up-to-date, then prints the number of threads used by OpenCV.
+4. The `runTbb()` function creates a grayscale image with a height of `IMAGE_HEIGHT` and a width of 1000 pixels, fills it with random values, calculates the histogram of the image using OpenCV's `calcHist()` function, and prints a message indicating that TBB was used. It also calls `reportThreads()`.
+5. The `runTbbThread()` function calls `reportThreads()` and then calls `runTbb()` twice.
+6. In the `main()` function:
+- The initial number of threads used by OpenCV is printed.
+- The number of threads used by OpenCV is set to 3 using `cv::setNumThreads(3)`.
+- `reportThreads()` is called to print the updated number of threads.
+- `runTbb()` is called twice.
+- A new thread is created using `std::thread` and `runTbbThread()` is executed in that thread.
+- The main thread waits for the new thread to finish using `thread.join()`.
+- `reportThreads()` is called again to print the number of threads after the new thread finishes.
+- `runTbb()` is called twice more. The purpose of this code is to demonstrate how OpenCV can utilize multiple threads for parallel processing, and how the number of threads can be controlled using `cv::setNumThreads()`.
+
+The code creates a separate thread and runs the `runTbbThread()` function in that thread, which in turn calls `runTbb()` twice, utilizing the TBB library for parallel processing. Note that the code includes a comment mentioning that calling `cv::setNumThreads(3)` inside the `runTbbThread()` function would cause a segmentation fault when `runTbb()` is called outside that thread. This is likely due to thread safety issues when modifying the number of threads used by OpenCV from multiple threads simultaneously.
+
