@@ -1,3 +1,24 @@
+Intel Threading Building Blocks (TBB) is a widely-used C++ library for parallel programming. It provides high-level constructs for expressing parallelism and concurrent execution, making it easier for developers to leverage multicore processors and parallel architectures effectively. TBB abstracts the complexity of low-level threading and synchronization mechanisms, allowing developers to focus on algorithm design and productivity.
+
+Here are some key features and components of Intel TBB:
+
+    Task-Based Parallelism: TBB introduces the concept of tasks, which represent units of work that can be executed concurrently. Developers can express parallelism by creating task-based algorithms, allowing TBB to manage the scheduling and execution of tasks efficiently.
+
+    Parallel Algorithms: TBB offers a collection of parallel algorithms that parallelize common computational tasks, such as parallel_for, parallel_reduce, parallel_scan, and parallel_sort. These algorithms automatically distribute workloads across multiple threads, improving performance on multicore systems.
+
+    Concurrency Control: TBB provides thread-safe data structures and synchronization primitives, including concurrent containers (e.g., concurrent_vector, concurrent_queue) and atomic operations (e.g., atomic, atomic_ref), to facilitate safe concurrent access to shared resources.
+
+    Parallel Task Scheduler: TBB includes a scalable task scheduler that dynamically adjusts the number of threads based on the available hardware resources and workload characteristics. This adaptive scheduler optimizes resource utilization and load balancing, maximizing parallel performance.
+
+    Flow Graph: TBB's flow graph framework enables the creation of dataflow graphs, where nodes represent computational tasks and edges represent data dependencies. Developers can express complex parallel workflows using this graphical model, leveraging TBB's scheduling and synchronization mechanisms for efficient execution.
+
+    Compatibility and Portability: TBB is designed to be compatible with various operating systems and platforms, including Windows, Linux, macOS, and different CPU architectures. It integrates seamlessly with popular C++ compilers and development environments, ensuring broad compatibility and portability.
+
+    Performance and Scalability: TBB emphasizes performance and scalability, aiming to exploit the full potential of multicore processors and parallel hardware. By leveraging efficient scheduling strategies, fine-grained parallelism, and optimized data structures, TBB enables developers to achieve high-performance parallel execution.
+
+Overall, Intel TBB provides a comprehensive set of tools and abstractions for parallel programming in C++, empowering developers to write scalable and efficient parallel applications with ease. Whether you're developing scientific simulations, multimedia processing, or data analytics applications, TBB offers a powerful framework for harnessing the power of parallelism.
+
+
 # Utilities which uses the power of Intel Threaded Building Blocks
 # OpenCvRTSPIntelTBBDemo.cpp
 This C++ code demonstrates the use of the Intel Threading Building Blocks (TBB) library and the OpenCV library to read and process an RTSP (Real-Time Streaming Protocol) video stream in a parallel manner. 
